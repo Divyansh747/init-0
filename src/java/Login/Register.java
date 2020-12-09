@@ -47,22 +47,20 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-     String user=request.getParameter("txtuser");
-     String pass=request.getParameter("txtpass");
-     String email=request.getParameter("txtemail");
-     int mobile=Integer.parseInt(request.getParameter("txtmob"));
-     HttpSession session=request.getSession();
-     session.setAttribute(user,"txtuser");
-     session.setAttribute(pass,"txtpass");
+     String enroll=request.getParameter("Enroll");
+     String email=request.getParameter("email");
+     String pass=request.getParameter("pass");
+     int mobile=Integer.parseInt(request.getParameter("phone"));
+     
     
      PrintWriter out=response.getWriter();
      ExamDao Ed=new ExamDao();
         try {
         
-            if(Ed.Register(user,pass,email,mobile))
+            if(Ed.Register(enroll,pass,email,mobile))
             {
                 out.println("user created");
-                response.sendRedirect("oldlogin.html");
+                response.sendRedirect("index.html");
                 System.out.println("user created");
             }
             else
