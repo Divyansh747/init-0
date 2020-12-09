@@ -17,7 +17,7 @@ public class mycon {
     public static Connection getConnection()
     {
         try {
-        con=DriverManager.getConnection("examportal.clvhkxqlq99f.us-east-1.rds.amazonaws.com:3306/examportal","admin","password");
+        con=DriverManager.getConnection("jdbc:mysql://examportal.clvhkxqlq99f.us-east-1.rds.amazonaws.com:3306/examportal","admin","password");
         System.out.println("Connected to my sql");
     } catch (SQLException e) {
             System.out.println(e);
@@ -25,4 +25,8 @@ public class mycon {
        return con;
 
 }
+    public static void main(String[] args) {
+        
+        System.out.println(mycon.getConnection());
+    }
 }
