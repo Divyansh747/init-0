@@ -1,0 +1,92 @@
+<html>
+<head>
+	<title>E-Notes Library</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- custom css  -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js"></script>
+   <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
+
+</head>
+<body onload="loaded(); pog = setInterval(progress, 10);setInterval(StartSlider, 30);">
+	<div class="loader" id="loader">	<img src="img/Logo1.png">
+</div>
+		<div class="progressbar">
+		<div class="progressbarper" id="progressbarper" style="width: 0;">		</div>
+		</div>
+	<nav class="navbar">
+    <div class="ham" onclick="appearLinkModel()">
+        <i class="fas fa-bars" ></i>
+    </div>
+	<div class="modelback" id="LinkModel" onclick="closeLinkModel(event)">
+	<div class="model">
+	<a href="index.html"><div class="link" ><linkicon><i class="fas fa-home"></i></linkicon>Home</div></a>
+	</div>
+	</div>
+	<div class="logo">
+	<img src="img/Logo.png">
+	</div>
+    <div class="login" onclick="openlogin()">
+        <i class="fas fa-user-circle"></i> 
+		<div class="loginName" id="loginName">Login</div>
+		<div class="loginName" id="loginName">Registration</div>
+    </div>
+	<div class="modelback " id="loginModel" onclick="closeLoginModel(event)">
+	<div class="model right">
+	</div>
+	</div>
+
+	</nav>
+	<div class="main">
+	<div class="card1out" id="card1out" onload="">
+	<div class=" card1 Page0" id="Page0" >
+	<div class="card1text">!!! WELCOME !!!<br>Exam Portal<br>Take/Get Exam at  </div>
+	<div class="getmyenotesdiv">
+		<img src="img/examlogo.png">
+
+	</div>
+	</div>
+	</div>
+	<div class="cardsliderline" >
+	<div class = "line line1" id="line1"></div>
+	<div class = "line line2" id="line2"></div>
+	<div class = "line line3" id="line3"></div>
+	</div>
+	<div class="card2">
+	<div class="card2content">
+		A paragraph is a series of related sentences developing a central idea, called the topic. Try to think about paragraphs in terms of thematic unity: a paragraph is a sentence or a group of sentences that supports one central, unified idea. Paragraphs add one idea at a time to your broader argument.
+	</div>
+	<div class="card2image">
+	<img src="img/Logo1.png">
+	</div>
+	</div>
+	<div class="card3">
+	<div class="card3heading">
+	Why Exam Portal 
+	</div>
+	<div class="card3content">
+	<div class="WhyItem">
+		<div class="WhyItemLogo"><i class="fas fa-mobile"></i></div>
+		<div class="WhyItemName">Get Any Time</div>
+		<div class="WhyItemDes">central idea, called the topic. Try to think about paragraphs in</div>
+	</div>
+	<div class="WhyItem">
+		<div class="WhyItemLogo"><i class="fas fa-mobile"></i></div>
+		<div class="WhyItemName">Get Any Time</div>
+		<div class="WhyItemDes">central idea, called the topic. Try to think about paragraphs in</div>
+	</div>
+	<div class="WhyItem">
+		<div class="WhyItemLogo"><i class="fas fa-mobile"></i></div>
+		<div class="WhyItemName">Get Any Time</div>
+		<div class="WhyItemDes">central idea, called the topic. Try to think about paragraphs in</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="footer">
+	All Right Reserve &#169; Copyright <br>Developed By Team Init 0
+	</div>
+		
+</body>
+</html>
