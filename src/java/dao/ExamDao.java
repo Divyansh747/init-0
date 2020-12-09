@@ -3,7 +3,7 @@ package dao;
 import connection.mycon;
 import java.sql.*;
 public class ExamDao {
-    public boolean Login(String enroll,String pass)throws SQLException
+    public boolean SLogin(String enroll,String pass)throws SQLException
     {
  
     Connection con=null;
@@ -22,6 +22,29 @@ public class ExamDao {
     }
     return false;
     }
+    
+    public boolean TLogin(String Tid,String pass)throws SQLException
+    {
+
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    String sql;
+    sql="select * from Tlogin where TeacherID=? and Password=?";
+    ps=con.prepareStatement(sql);
+    ps.setString(1,Tid);
+    ps.setString(2,pass);
+    ResultSet rs=null;
+    rs=ps.executeQuery();
+    if(rs.next())
+    {
+        return true;
+    }
+    return false;
+    }
+    
+    
+    
     public void store(String dt) throws SQLException
     {
     Connection con=null;

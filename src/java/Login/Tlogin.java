@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class login extends HttpServlet {
+public class Tlogin extends HttpServlet {
 
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,10 +48,6 @@ public class login extends HttpServlet {
      String enroll=request.getParameter("enroll");
      String pass=request.getParameter("pass");
      
-     
-     HttpSession session=request.getSession();
-     session.setAttribute("enroll",enroll);
-     session.setAttribute("pass",pass);
      PrintWriter out=response.getWriter();
      ExamDao sd=new ExamDao();
         try {
@@ -59,7 +55,7 @@ public class login extends HttpServlet {
             if(sd.SLogin(enroll,pass))
             {
                 out.println("valid user");
-                response.sendRedirect("student.jsp");
+                response.sendRedirect("THome.html");
             }
             else
             {

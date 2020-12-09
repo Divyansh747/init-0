@@ -1,21 +1,23 @@
-
 package Login;
+
+
 
 import dao.ExamDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ *
+ * @author Dell
+ */
+public class TRegister extends HttpServlet {
 
-public class login extends HttpServlet {
-
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -24,66 +26,57 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginServlet</title>");            
+            out.println("<title>Servlet Register</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet loginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-   
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-     String enroll=request.getParameter("enroll");
+     String Tid=request.getParameter("Tid");
+     String email=request.getParameter("email");
      String pass=request.getParameter("pass");
+     int mobile=Integer.parseInt(request.getParameter("phone"));
      
-     
-     HttpSession session=request.getSession();
-     session.setAttribute("enroll",enroll);
-     session.setAttribute("pass",pass);
+    
      PrintWriter out=response.getWriter();
-     ExamDao sd=new ExamDao();
+     ExamDao Ed=new ExamDao();
         try {
         
-            if(sd.SLogin(enroll,pass))
+            if(Ed.Register(Tid,pass,email,mobile))
             {
-                out.println("valid user");
-                response.sendRedirect("student.jsp");
+                out.println("user created");
+                response.sendRedirect("index.html");
+                System.out.println("user created");
             }
             else
             {
             out.println("invalid user");
-               if(enroll.equals("Admin")&&pass.equals("12345"))
-               {
-                   response.sendRedirect("DownloadInfo");
-               }
-            
+            //response.sendRedirect("index.html");
             }
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
            out.println(ex);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+  
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

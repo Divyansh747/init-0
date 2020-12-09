@@ -1,0 +1,23 @@
+.card2con {
+    padding: 10px  200px;
+}
+
+.Questions {
+    padding: 10px;
+}
+
+.Question.MCQ {
+    border: 1px solid black;
+    box-shadow: 1px 1px 7px;
+    padding: 10px;
+    border-radius: 14px;
+}
+.que {
+    padding: 10px;
+}
+
+.AnswerKey {
+    padding: 10px;
+}
+
+.Option input {}
