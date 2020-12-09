@@ -45,26 +45,26 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-     String email=request.getParameter("txtemail");
-     String pass=request.getParameter("txtpass");
-
+     String enroll=request.getParameter("enroll");
+     String pass=request.getParameter("pass");
+     
+     
      HttpSession session=request.getSession();
-     session.setAttribute(email,"txtemail");
-     session.setAttribute(pass,"txtpass");
+     session.setAttribute("enroll",enroll);
+     session.setAttribute("pass",pass);
      PrintWriter out=response.getWriter();
      ExamDao sd=new ExamDao();
         try {
         
-            if(sd.Login(email,pass))
+            if(sd.Login(enroll,pass))
             {
-              
                 out.println("valid user");
-                response.sendRedirect("SelectBranch.html");
+                response.sendRedirect("student.jsp");
             }
             else
             {
             out.println("invalid user");
-               if(email.equals("Admin")&&pass.equals("12345"))
+               if(enroll.equals("Admin")&&pass.equals("12345"))
                {
                    response.sendRedirect("DownloadInfo");
                }
