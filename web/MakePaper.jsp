@@ -1,3 +1,5 @@
+<%@page import="Model.TeacherModel"%>
+<%@page import="dao.ExamDao"%>
 <html>
 <head>
 	<title>Exam Portal</title>
@@ -17,6 +19,7 @@
 
 </head>
 <body >
+    
 
 	
 		<div class="progressbar">
@@ -27,9 +30,14 @@
 	<div class="logo">
 	<img src="img/Logo.png">
 	</div>
+        <%
+        ExamDao d  = new ExamDao();
+        TeacherModel t = d.getTeacherById(request.getParameter("TeacherID"));
+        
+        %>
     <div class="login" onclick="openlogin()">
         <i class="fas fa-user-circle"></i> 
-		<div class="loginName" id="loginName">#Teacher Name</div>
+		<div class="loginName" id="loginName"><%= t.getTeacherId()%></</div>
     </div>
 	<div class="modelback " id="loginModel" onclick="closeLoginModel(event)">
 	<div class="model right">
@@ -40,7 +48,8 @@
 	<div class="main">
 	<div class="card1 Page0" id="Page0" >
 	<div class="card1text">
-
+            
+            <form action="Question.jsp">
 <!-- Button to Open the Modal -->
   <div class="but" onclick="addMCQquestion()">
     Add MCQ Question
@@ -61,14 +70,15 @@
 	</div>
 	<div class="card2 " id="Page1" >
 	<div class="heading heading2"> Test Paper </div>
-	<div class="heading heading3"> Subject : #Subject ||  Date : #date || Timing : #from - #to</div>
+	<div class="heading heading3"> Subject : #Subject ||  Date : #date </div>
 	<div class="card2con"> 
 	<div class="Questions"  id="Questions">
 		<div class="que"><label for="noq"> No Of Question</label><input type="text" id="noQuestion" name="noQuestion" readonly placeholder="" class="form-control"></div>
 		
 	</div>
-	
+	<button class="btn btn-primary" type="submit">submit</button>
 	</div>
+        </form>
 	</div>
 	
 	
