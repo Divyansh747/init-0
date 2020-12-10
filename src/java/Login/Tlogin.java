@@ -52,7 +52,7 @@ public class Tlogin extends HttpServlet {
      ExamDao sd=new ExamDao();
         try {
         
-            if(sd.SLogin(enroll,pass))
+            if(sd.TLogin(enroll,pass))
             {
                 out.println("valid user");
                 response.sendRedirect("THome.jsp?TeacherID="+enroll);
@@ -60,11 +60,7 @@ public class Tlogin extends HttpServlet {
             else
             {
             out.println("invalid user");
-               if(enroll.equals("Admin")&&pass.equals("12345"))
-               {
-                   response.sendRedirect("DownloadInfo");
-               }
-            
+              
             }
         } 
         catch (SQLException ex) {
