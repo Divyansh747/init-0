@@ -1,6 +1,8 @@
 package dao;
 
+import Model.OptionModel;
 import Model.PaperModel;
+import Model.QuestionModel;
 import Model.TeacherModel;
 import connection.mycon;
 import java.sql.*;
@@ -159,6 +161,26 @@ public class ExamDao {
     return t;
 } 
     
+    public int getNextQuestionID() throws SQLException{
+    String sql;
+    int paperno = 5000;
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    sql="Select max(QuestionID) from Question;";
+    ps=con.prepareStatement(sql);
+    ResultSet rs=ps.executeQuery();
+    if(rs.next()){
+    if(rs.getInt("max(QuestionID)") != 0){
+    paperno = rs.getInt("max(QuestionID)")+1;
+    }
+    }
+    con.close();
+    return paperno;
+} 
+    
+    
+    
     public boolean AddPaper(PaperModel p)throws SQLException
     {
     Connection con=null;
@@ -221,6 +243,57 @@ public class ExamDao {
     return false;
     }
     
+     public boolean InsertQuestion(QuestionModel QM)throws SQLException
+    {
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    String sql;
+    sql="insert into Question values(?,?,?,?,?)";
+    ps=con.prepareStatement(sql);
+    ps.setInt(1,QM.getQuestionID());
+    ps.setInt(2,QM.getPaperID());
+    ps.setString(3,QM.getQuestion());
+    ps.setInt(4,QM.getType());
+    ps.setInt(5,QM.getMarks());
+    
+    int n=ps.executeUpdate();
+ 
+    if(n>0)
+    {
+    return true;
+    }
+    return false;
+    }
+           
+     
+     
+     
+     
+     public boolean InsertOption(OptionModel om)throws SQLException
+    {
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    String sql;
+    sql="insert into Options values(?,?,?,?)";
+    ps=con.prepareStatement(sql);
+    ps.setInt(1,om.getOptionID());
+    ps.setInt(2,om.getQuestionID());
+    ps.setString(3,om.getOptionVal());
+    ps.setInt(4,om.getAnswerKey());
+    
+    
+    int n=ps.executeUpdate();
+ 
+    if(n>0)
+    {
+    return true;
+    }
+    return false;
+    }
+            
+            
     public List<PaperModel> getPaperByTeacherID(String TeacherID) throws SQLException{
         String sql;
         Connection con=null;
