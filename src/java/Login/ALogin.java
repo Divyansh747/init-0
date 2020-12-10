@@ -54,7 +54,7 @@ public class ALogin extends HttpServlet {
             if(ename.equals("Admin")&&pass.equals("admin"))
             {
                 out.println("valid user");
-                response.sendRedirect("adminpage.html");
+                response.sendRedirect("adminpage.jsp");
             }
             else
             {

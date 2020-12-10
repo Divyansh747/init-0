@@ -1,5 +1,7 @@
 <%@page import="Model.TeacherModel"%>
+<%@page import="Model.PaperModel"%>
 <%@page import="dao.ExamDao"%>
+<%@page import="java.util.List"%>
 <html>
 <head>
 	<title>Exam Portal</title>
@@ -77,22 +79,25 @@
     </tr>
   </thead>
   <tbody>
+      <%
+           List<PaperModel> l = d.getPaperByTeacherID(t.getTeacherId());
+           int i = 0;
+           for(PaperModel p : l){
+               
+               i++;
+          %>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Mark</td>
-      <td>Otto</td>
+      <th scope="row"><%= i %></th>
+      <td><%=p.getSubject()%></td>
+      <td><%=p.getPaperId()%></td>
+      <td><%=p.getDate()%></td>
+      <td>#No</td>
       <td>#Detail Button</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>#Detail Button</td>
-    </tr>
+    <%
+        }
+    %>
+    
   </tbody>
 </table>
 	
@@ -121,26 +126,27 @@
           <h4 class="modal-title">Make New Paper</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
+        <form action="addpaper.jsp">
         
         <!-- Modal body -->
         <div class="modal-body">
 		<div class="form-group">
       <label for="usr">Paper ID</label>
-      <input type="text" class="form-control" required id="usr" readonly value="<%= d.getNextPaperID() %>">
+      <input type="text" class="form-control" required name="PaperID" readonly value="<%= d.getNextPaperID() %>">
     </div>
        
 		<div class="form-group">
       <label for="usr">Teacher ID</label>
-      <input type="text" class="form-control" required id="usr" readonly value="<%= t.getTeacherId() %>">
+      <input type="text" class="form-control" required name="TeacherID" readonly value="<%= t.getTeacherId() %>">
     </div>
         
 		<div class="form-group">
       <label for="usr">Subject Name</label>
-      <input type="text" class="form-control" required id="usr"  value="">
+      <input type="text" class="form-control" required name="Subject"  value="">
     </div>
 		<div class="form-group">
       <label for="usr">Paper Date</label>
-      <input type="Date" class="form-control" required id="usr"  value="">
+      <input type="Date" class="form-control" required name="PaperDate"  value="">
     </div>
         </div>
         
@@ -149,6 +155,7 @@
 		<button type="submit" class="btn btn-primary">Make New Paper</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
+        </form>
         
       </div>
     </div>

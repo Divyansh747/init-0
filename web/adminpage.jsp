@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.ExamDao"%>
+<%@page import="Model.TeacherModel"%>
 <html>
 <head>
 	<title>Exam Portal</title>
@@ -16,7 +19,10 @@
 
 </head>
 <body >
-
+<%
+        ExamDao d  = new ExamDao();
+        
+        %>
 	
 		<div class="progressbar">
 		<div class="progressbarper" id="progressbarper" style="width: 0;">		</div>
@@ -66,15 +72,22 @@
     </tr>
   </thead>
   <tbody>
+      <%
+      List<TeacherModel> l = d.getAllTeacher();
+      int i = 0;
+for(TeacherModel t : l){
+    i++;
+      %>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Mark</td>
+      <th scope="row"><%= i %></th>
+      <td><%= t.getTeacherId() %></td>
+      <td><%= t.getEmail()%></td>
+      <td><%= t.getPhoneNumber()%></td>
       <td>#Remove Button</td>
     </tr>
-    <tr>
-    </tr>
+    <%
+    }
+    %>
   </tbody>
 </table>
 	
@@ -98,26 +111,26 @@
     <div class="modal-dialog">
       <div class="modal-content">
       
+       <form action="addteacher.jsp" method="post">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Make New Paper</h4>
-          <button type="button" class="close" data-dismiss="modal">Ã—</button>
+          <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-       
 		<div class="form-group">
       <label for="usr">Teacher ID</label>
-      <input type="text" class="form-control" required id="usr" readonly value="Auto">
+      <input type="text" class="form-control" required id="usr" name="TeacherID" readonly value="<%= d.getNextTeacherID() %>">
     </div>
 		<div class="form-group">
       <label for="usr">Email</label>
-      <input type="Email" class="form-control" required id="usr"  value="">
+      <input type="Email" class="form-control" required id="usr" name="Email" value="">
     </div>
 		<div class="form-group">
       <label for="usr">Mobile</label>
-      <input type="tel" class="form-control" required id="usr"  value="">
+      <input type="tel" class="form-control" required id="usr" name="Mobile" value="">
     </div>
         
         </div>
@@ -127,7 +140,7 @@
 		<button type="submit" class="btn btn-primary">Add New Teacher</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+      </form>  
       </div>
     </div>
   </div>
