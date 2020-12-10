@@ -84,6 +84,23 @@ public class ExamDao {
     return rs;
     } 
     
+    public int getNextPaperID() throws SQLException{
+    String sql;
+    int paperno = 200000;
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    sql="Select max(PaperID) from paper;";
+    ps=con.prepareStatement(sql);
+    ResultSet rs=ps.executeQuery();
+    if(rs.next()){
+    if(rs.getInt("max(PaperID)") != 0){
+    paperno = rs.getInt("max(PaperID)")+1;
+    }
+    }
+    con.close();
+    return paperno;
+} 
     
     
     
