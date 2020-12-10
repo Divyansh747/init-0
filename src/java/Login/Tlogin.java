@@ -55,7 +55,7 @@ public class Tlogin extends HttpServlet {
             if(sd.SLogin(enroll,pass))
             {
                 out.println("valid user");
-                response.sendRedirect("THome.html");
+                response.sendRedirect("THome.jsp?TeacherID="+enroll);
             }
             else
             {

@@ -5,19 +5,20 @@ package Model;
 public class PaperModel 
 {
 
-String PaperId;
+int PaperId;
 String TeacherId;
 String Subject;
-long Time;
 String Date;
 
-    public String getPaperId() {
+    public int getPaperId() {
         return PaperId;
     }
 
-    public void setPaperId(String PaperId) {
+    public void setPaperId(int PaperId) {
         this.PaperId = PaperId;
     }
+
+   
 
     public String getTeacherId() {
         return TeacherId;
@@ -35,13 +36,7 @@ String Date;
         this.Subject = Subject;
     }
 
-    public long getTime() {
-        return Time;
-    }
 
-    public void setTime(long Time) {
-        this.Time = Time;
-    }
 
     public String getDate() {
         return Date;

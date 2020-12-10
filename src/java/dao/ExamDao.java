@@ -1,7 +1,11 @@
 package dao;
 
+import Model.PaperModel;
+import Model.TeacherModel;
 import connection.mycon;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 public class ExamDao {
     public boolean SLogin(String enroll,String pass)throws SQLException
     {
@@ -90,7 +94,7 @@ public class ExamDao {
     Connection con=null;
     PreparedStatement ps=null;
     con=mycon.getConnection();
-    sql="Select max(PaperID) from paper;";
+    sql="Select max(PaperID) from Paper;";
     ps=con.prepareStatement(sql);
     ResultSet rs=ps.executeQuery();
     if(rs.next()){
@@ -100,6 +104,23 @@ public class ExamDao {
     }
     con.close();
     return paperno;
+} 
+    public TeacherModel getTeacherById(String TeacherID) throws SQLException{
+    String sql;
+    Connection con=null;
+    PreparedStatement ps=null;
+    con=mycon.getConnection();
+    sql="Select * from Tlogin where TeacherID = ?;";
+    ps=con.prepareStatement(sql);
+    ps.setString(1, TeacherID);
+    ResultSet rs=ps.executeQuery();
+    TeacherModel t = new TeacherModel();
+    if(rs.next()){
+    t.setTeacherId(rs.getString("TeacherID"));
+    t.setEmail(rs.getString("Email"));
+    }
+    con.close();
+    return t;
 } 
     
     
@@ -125,5 +146,27 @@ public class ExamDao {
     return false;
     }
     
-  
+    public List<PaperModel> getPaperByTeacherID(String TeacherID) throws SQLException{
+        String sql;
+        Connection con=null;
+        PreparedStatement ps=null;
+        con=mycon.getConnection();
+        sql="select * from Paper where TeacherID = ?";
+        ps=con.prepareStatement(sql);
+        ps.setString(1, TeacherID);
+        ResultSet rs=ps.executeQuery();
+        List<PaperModel> l = new ArrayList<PaperModel>();
+        while(rs.next()){
+        PaperModel packet=new PaperModel();
+        packet.setPaperId(rs.getInt("PaperID"));
+        packet.setTeacherId(rs.getString("TeacherID"));
+        packet.setSubject(rs.getString("Subject"));
+        packet.setDate(rs.getString("Date"));
+        l.add(packet);
+        }
+        return  l;
+    }
+
+    
+    
 }

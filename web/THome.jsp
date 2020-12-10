@@ -1,3 +1,5 @@
+<%@page import="Model.TeacherModel"%>
+<%@page import="dao.ExamDao"%>
 <html>
 <head>
 	<title>Exam Portal</title>
@@ -17,7 +19,11 @@
 </head>
 <body >
 
-	
+	<%
+        ExamDao d  = new ExamDao();
+        TeacherModel t = d.getTeacherById(request.getParameter("TeacherID"));
+        
+        %>
 		<div class="progressbar">
 		<div class="progressbarper" id="progressbarper" style="width: 0;">		</div>
 		</div>
@@ -28,7 +34,7 @@
 	</div>
     <div class="login" onclick="openlogin()">
         <i class="fas fa-user-circle"></i> 
-		<div class="loginName" id="loginName">#Teacher Name</div>
+		<div class="loginName" id="loginName"><%= t.getTeacherId()%></div>
     </div>
 	<div class="modelback " id="loginModel" onclick="closeLoginModel(event)">
 	<div class="model right">
@@ -120,12 +126,12 @@
         <div class="modal-body">
 		<div class="form-group">
       <label for="usr">Paper ID</label>
-      <input type="text" class="form-control" required id="usr" readonly value="Auto">
+      <input type="text" class="form-control" required id="usr" readonly value="<%= d.getNextPaperID() %>">
     </div>
        
 		<div class="form-group">
       <label for="usr">Teacher ID</label>
-      <input type="text" class="form-control" required id="usr" readonly value="Auto">
+      <input type="text" class="form-control" required id="usr" readonly value="<%= t.getTeacherId() %>">
     </div>
         
 		<div class="form-group">
@@ -135,12 +141,6 @@
 		<div class="form-group">
       <label for="usr">Paper Date</label>
       <input type="Date" class="form-control" required id="usr"  value="">
-    </div>
-		<div class="form-group">
-      <label for="usr">Paper Timing From</label>
-      <input type="time" class="form-control" required id="usr"  value="">
-      <label for="usr"> To</label>
-      <input type="time" class="form-control" required id="usr"  value="">
     </div>
         </div>
         
